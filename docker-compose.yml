@@ -4,4 +4,6 @@ services:
   product-registry:
     build: .
     volumes:
-    - .:/usr/src/app
+      - .:/usr/src/app
+    ports:
+      - 1234:80
