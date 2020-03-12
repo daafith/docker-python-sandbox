@@ -70,4 +70,3 @@ product_routes = [
 
 api.add_resource(ProductList, '/products')
 api.add_resource(Product, *product_routes)
-# api.add_resource(Product, '/product/<string:identifier>')
