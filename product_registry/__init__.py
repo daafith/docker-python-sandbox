@@ -39,4 +39,31 @@ class ProductList(Resource):
 
         return {'message': 'My products', 'data': products}, 200
 
+    def post(self):
+        parser = reqparse.RequestParser()
+
+        parser.add_argument('identifier', required=True)
+        parser.add_argument('name', required=True)
+        parser.add_argument('price', required=True)
+
+        # Parse the arguments into an object
+        args = parser.parse_args()
+
+        collection = get_db()
+        collection[args['identifier']] = args
+
+        return {'message': 'Product registered', 'data': args}, 201
+
+
+class Product(Resource):
+    def get(self, identifier):
+        collection = get_db()
+
+        if not (identifier in collection):
+            return {'message': 'Product not found', 'data': {}}, 404
+
+        return {'message': 'Product found', 'data': collection[identifier]}, 200
+
+
 api.add_resource(ProductList, '/products')
+api.add_resource(Product, '/product/<string:identifier>')
