@@ -50,17 +50,17 @@ class Product(Resource):
     
     def post(self):
         parser = reqparse.RequestParser()
-
         parser.add_argument('identifier', required=True)
         parser.add_argument('name', required=True)
         parser.add_argument('price', required=True)
 
-        # Parse the arguments into an object
         args = parser.parse_args()
-
         collection = get_db()
-        collection[args['identifier']] = args
 
+        if (args['identifier'] in collection):
+            return {'message': 'Product already exists', 'data': {}}, 202
+ 
+        collection[args['identifier']] = args
         return {'message': 'Product registered', 'data': args}, 201
 
 product_routes = [
