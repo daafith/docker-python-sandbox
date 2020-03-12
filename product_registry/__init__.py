@@ -39,6 +39,15 @@ class ProductList(Resource):
 
         return {'message': 'My products', 'data': products}, 200
 
+class Product(Resource):
+    def get(self, identifier):
+        collection = get_db()
+
+        if not (identifier in collection):
+            return {'message': 'Product not found', 'data': {}}, 404
+
+        return {'message': 'Product found', 'data': collection[identifier]}, 200
+    
     def post(self):
         parser = reqparse.RequestParser()
 
@@ -54,16 +63,11 @@ class ProductList(Resource):
 
         return {'message': 'Product registered', 'data': args}, 201
 
-
-class Product(Resource):
-    def get(self, identifier):
-        collection = get_db()
-
-        if not (identifier in collection):
-            return {'message': 'Product not found', 'data': {}}, 404
-
-        return {'message': 'Product found', 'data': collection[identifier]}, 200
-
+product_routes = [
+    '/product',
+    '/product/<string:identifier>'
+]
 
 api.add_resource(ProductList, '/products')
-api.add_resource(Product, '/product/<string:identifier>')
+api.add_resource(Product, *product_routes)
+# api.add_resource(Product, '/product/<string:identifier>')
