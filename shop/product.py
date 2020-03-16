@@ -24,6 +24,21 @@ class Product(Resource):
  
         products[args['identifier']] = args
         return {'message': 'Product registered', 'product': args}, 201
+    
+    def put(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('identifier', required=True)
+        parser.add_argument('name', required=True)
+        parser.add_argument('price', required=True)
+
+        args = parser.parse_args()
+        products = get_db(Collection.products)
+
+        if not (args['identifier'] in products):
+            return {'message': 'Product not found'}, 404
+ 
+        products[args['identifier']] = args
+        return {'message': 'Product updated', 'product': args}, 200
 
 class ProductList(Resource):
     def get(self):
