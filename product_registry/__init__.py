@@ -37,16 +37,16 @@ class ProductList(Resource):
         for key in keys:
             products.append(collection[key])
 
-        return {'message': 'My products', 'data': products}, 200
+        return {'message': 'Products found', 'products': products}, 200
 
 class Product(Resource):
     def get(self, identifier):
         collection = get_db()
 
         if not (identifier in collection):
-            return {'message': 'Product not found', 'data': {}}, 404
+            return {'message': 'Product not found'}, 404
 
-        return {'message': 'Product found', 'data': collection[identifier]}, 200
+        return {'message': 'Product found', 'product': collection[identifier]}, 200
     
     def post(self):
         parser = reqparse.RequestParser()
@@ -58,10 +58,10 @@ class Product(Resource):
         collection = get_db()
 
         if (args['identifier'] in collection):
-            return {'message': 'Product already exists', 'data': {}}, 202
+            return {'message': 'Product already exists'}, 202
  
         collection[args['identifier']] = args
-        return {'message': 'Product registered', 'data': args}, 201
+        return {'message': 'Product registered', 'product': args}, 201
 
 product_routes = [
     '/product',
