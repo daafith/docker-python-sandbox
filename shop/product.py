@@ -10,31 +10,37 @@ class Product(Resource):
         return {'message': 'Product found', 'product': products[identifier]}, 200
     
     def post(self):
-        parser = reqparse.RequestParser()
+        parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument('identifier', required=True)
         parser.add_argument('name', required=True)
-        parser.add_argument('price', required=True)
+        parser.add_argument('price', type=int, required=True)
 
         args = parser.parse_args()
         products = get_db(Collection.products)
 
         if (args['identifier'] in products):
             return {'message': 'Product already exists'}, 409
+        
+        if int(args['price']) <= 0:
+            return {'message': 'Price must be higher than 0'}, 400
  
         products[args['identifier']] = args
         return {'message': 'Product registered', 'product': args}, 201
     
     def put(self):
-        parser = reqparse.RequestParser()
+        parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument('identifier', required=True)
         parser.add_argument('name', required=True)
-        parser.add_argument('price', required=True)
+        parser.add_argument('price', type=int, required=True)
 
         args = parser.parse_args()
         products = get_db(Collection.products)
 
         if not (args['identifier'] in products):
             return {'message': 'Product not found'}, 404
+
+        if int(args['price']) <= 0:
+            return {'message': 'Price must be higher than 0'}, 400
  
         products[args['identifier']] = args
         return {'message': 'Product updated', 'product': args}, 200
@@ -43,7 +49,7 @@ class Product(Resource):
         products = get_db(Collection.products)
         if not (identifier in products):
             return {'message': 'Product does not exist (anymore)'}, 410
-            
+
         del products[identifier]
         return {'message': 'Product removed'}, 200
 
@@ -57,4 +63,4 @@ class ProductList(Resource):
         for key in keys:
             ps.append(products[key])
 
-        return {'message': 'Products found', 'products': ps}, 200
+        return {'message': str(len(ps)) + ' Product(s) found', 'products': ps}, 200
