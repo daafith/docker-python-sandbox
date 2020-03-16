@@ -2,7 +2,13 @@
 A simple python web service running in docker
 
 ## Start
-Run `. start.sh` to have a clean start of the service without data on port 1234.
+Run `. start.sh` to start the service on port 1234, the initial start is without data.
+
+### Populate
+TODO
+
+### Clean
+Run `. clean.sh` to remove all data.
 
 ## API
 ```
