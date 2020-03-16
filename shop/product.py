@@ -4,7 +4,6 @@ from .db import Collection, get_db
 class Product(Resource):
     def get(self, identifier):
         products = get_db(Collection.products)
-
         if not (identifier in products):
             return {'message': 'Product not found'}, 404
 
@@ -39,6 +38,14 @@ class Product(Resource):
  
         products[args['identifier']] = args
         return {'message': 'Product updated', 'product': args}, 200
+
+    def delete(self, identifier):
+        products = get_db(Collection.products)
+        if not (identifier in products):
+            return {'message': 'Product does not exist (anymore)'}, 410
+            
+        del products[identifier]
+        return {'message': 'Product removed'}, 200
 
 class ProductList(Resource):
     def get(self):
