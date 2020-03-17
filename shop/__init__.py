@@ -2,7 +2,7 @@ from flask import Flask, g
 import markdown
 import os
 from flask_restful import Api
-from .product import Product, ProductList
+from .product import Product
 
 app = Flask(__name__)
 
@@ -23,8 +23,7 @@ def index():
 
 product_routes = [
     '/product',
-    '/product/<string:identifier>'
+    '/product/<string:name>'
 ]
 
-api.add_resource(ProductList, '/products')
 api.add_resource(Product, *product_routes)

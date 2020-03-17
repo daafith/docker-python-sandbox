@@ -22,31 +22,31 @@ Displays this README as HTML
 ### Product
 
 ```
-GET /product/<identifier>
+GET /product/<name>
 ```
 
-Returns the product linked to the identifier
+Returns the product linked to the name
 
 ```
 POST /product/
 ```
 
-Creates the product, BODY `{ "identifier": "product id", "name": "product name", "price": 1199 }`
+Creates the product, BODY `{ "name": "product name", "price": 1199 }`
 
 ```
 PUT /product/
 ```
 
-Updates the product, BODY `{ "identifier": "product id", "name": "product name", "price": 1299 }`
+Updates the product, BODY `{ "name": "product name", "price": 1299 }`
 
 ```
-DELETE /product/<identifier>
+DELETE /product/<name>
 ```
 
-Deletes the product linked to the identifier
+Deletes the product linked to the name
 
 ```
-GET /products/
+GET /product/
 ```
 
 Returns the list of registered products
