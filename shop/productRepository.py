@@ -25,7 +25,7 @@ class ProductRepository:
         self.db[product['name']] = product
 
     def update(self, product):
-        self.db[product['name']] = product
+        self.save(product)
 
     def remove(self, name):
         del self.db[name]
