@@ -28,13 +28,19 @@ GET /product/<name>
 Returns the product linked to the name
 
 ```
-POST /product/
+GET /product
+```
+
+Returns the list of registered products
+
+```
+POST /product
 ```
 
 Creates the product, BODY `{ "name": "product name", "price": 1199 }`
 
 ```
-PUT /product/
+PUT /product
 ```
 
 Updates the product, BODY `{ "name": "product name", "price": 1299 }`
@@ -44,9 +50,3 @@ DELETE /product/<name>
 ```
 
 Deletes the product linked to the name
-
-```
-GET /product/
-```
-
-Returns the list of registered products
