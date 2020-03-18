@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "da9cb226-1c5b-4b76-8e6a-c9c4975616e5",
+		"name": "Python webservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2efb80b7-ff89-4a98-845a-a0a611b548f0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				},
+				"description": "GET - products"
+			},
+			"response": []
+		},
+		{
+			"name": "GET - product 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82dae803-7856-460d-95be-a93b6ca8ab47",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/product/idontexist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product",
+						"idontexist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - create product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Vlaai\",\n\t\"unitPrice\": 595,\n\t\"unitSize\": 1,\n\t\"unitType\": \"ITEM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - create product 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Toy Truck\",\n\t\"unitPrice\": 1950,\n\t\"unitSize\": 1,\n\t\"unitType\": \"ITEM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - create product missing params",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Truck\",\n\t\"unitPrice\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - create product illegal price",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Cheap stuff\",\n\t\"unitPrice\": 4,\n\t\"unitSize\": 1,\n\t\"unitType\": \"ITEM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - create product illegal type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Some stuff\",\n\t\"unitPrice\": 400,\n\t\"unitSize\": 1,\n\t\"unitType\": \"BOX\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - update product 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Toy Truck\",\n\t\"unitPrice\": 2350,\n\t\"unitSize\": 1,\n\t\"unitType\": \"ITEM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - update product 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"idontexist\",\n\t\"unitPrice\": 2350,\n\t\"unitSize\": 1,\n\t\"unitType\": \"ITEM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - product 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:1234/product/Toy%20Truck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product",
+						"Toy%20Truck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - product 410",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bcd6726-4fc7-44c0-bda1-d1ce98b2d554",
+						"exec": [
+							"pm.test(\"Status code is 410\", function () {",
+							"    pm.response.to.have.status(410);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:1234/product/idontexist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product",
+						"idontexist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - product 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82dae803-7856-460d-95be-a93b6ca8ab47",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/product/Vlaai",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"product",
+						"Vlaai"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
