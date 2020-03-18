@@ -1,1 +1,1 @@
-[ -f *.db ] && rm *.db
+rm *.db 2> /dev/null
