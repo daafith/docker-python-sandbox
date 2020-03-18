@@ -37,13 +37,13 @@ Returns the list of registered products
 POST /product
 ```
 
-Creates the product, BODY `{ "name": "product name", "price": 1199 }`
+Creates the product, BODY `{ "name": "product name", "unitPrice": 1199, "unitSize": 1, "unitType": "ITEM" }`
 
 ```
 PUT /product
 ```
 
-Updates the product, BODY `{ "name": "product name", "price": 1299 }`
+Updates the product, BODY `{ "name": "product name", "unitPrice": 1299, "unitSize": 1, "unitType": "ITEM" }`
 
 ```
 DELETE /product/<name>

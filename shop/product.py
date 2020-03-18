@@ -4,9 +4,12 @@ from .productRepository import ProductRepository
 class Product(Resource):
     def __init__(self):
         self.repo = ProductRepository()
-        self.parser = reqparse.RequestParser()
+        self.parser = reqparse.RequestParser(bundle_errors=True)
         self.parser.add_argument('name', required=True)
-        self.parser.add_argument('price', type=int, required=True)
+        self.parser.add_argument('unitPrice', type=int, required=True)
+        self.parser.add_argument('unitSize', type=int, required=True)
+        self.parser.add_argument('unitType', choices=('ITEM', 'GRAM', 'MILLILITER'), required=True)
+        
 
     def get(self, name=None):
         if name is None:
@@ -24,8 +27,8 @@ class Product(Resource):
         if self.repo.hasItem(args['name']):
             return {'message': 'Product already exists'}, 409
         
-        if int(args['price']) <= 0:
-            return {'message': 'Price must be higher than 0'}, 400
+        if int(args['unitPrice']) < 5:
+            return {'message': 'Price must be 5 or higher'}, 400
  
         self.repo.save(args)
         return {'message': 'Product registered', 'product': args}, 201
@@ -36,8 +39,8 @@ class Product(Resource):
         if not self.repo.hasItem(args['name']):
             return {'message': 'Product not found'}, 404
 
-        if int(args['price']) <= 0:
-            return {'message': 'Price must be higher than 0'}, 400
+        if int(args['unitPrice']) < 5:
+            return {'message': 'Price must be 5 or higher'}, 400
          
         self.repo.update(args)
         return {'message': 'Product updated', 'product': args}, 200
