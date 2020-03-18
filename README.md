@@ -50,3 +50,6 @@ DELETE /product/<name>
 ```
 
 Deletes the product linked to the name
+
+### Test
+You can use the Postman collection to validate stuff works. Nothing fancy, but it's something.
