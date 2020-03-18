@@ -7,7 +7,7 @@ curl --header "Content-Type: application/json" \
   http://localhost:1234/product
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"name":"Fire Balls","unitPrice":89","unitSize":1,"unitType":"ITEM"}' \
+  --data '{"name":"Fire Balls","unitPrice":89,"unitSize":1,"unitType":"ITEM"}' \
   http://localhost:1234/product
 curl --header "Content-Type: application/json" \
   --request POST \

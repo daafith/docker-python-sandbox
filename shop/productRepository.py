@@ -1,6 +1,6 @@
 from .db import Collection, get_db
 
-class ProductRepository:
+class ProductRepository(object):
     def __init__(self):
         self.db = get_db(Collection.products)
     
@@ -9,7 +9,7 @@ class ProductRepository:
             return True
         return False
 
-    def get(self, name):
+    def find(self, name):
         if not self.hasItem(name):
             return None
         return self.db[name]

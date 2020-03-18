@@ -11,4 +11,3 @@ def get_db(Collection):
     if db is None:
         db = g._database = shelve.open(Collection.value)
     return db
-

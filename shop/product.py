@@ -18,15 +18,15 @@ class Product(Resource):
             ps = self.repo.all()
             return {'message': str(len(ps)) + ' Product(s) found', 'products': ps}, 200
 
-        if not self.__isInDatabase(name):
+        if not self.repo.hasItem(name):
             return Product.notFoundMessage, 404
         
-        return {'message': 'Product found', 'product': self.repo.get(name)}, 200
+        return {'message': 'Product found', 'product': self.repo.find(name)}, 200
     
     def post(self):
         args = self.parser.parse_args()
 
-        if self.__isInDatabase(args['name']):
+        if self.repo.hasItem(args['name']):
             return {'message': 'Product already exists'}, 409
         
         if not self.__isValidPrice(args):
@@ -38,7 +38,7 @@ class Product(Resource):
     def put(self):
         args = self.parser.parse_args()
 
-        if not self.__isInDatabase(args['name']):
+        if not self.repo.hasItem(args['name']):
             return Product.notFoundMessage, 404
 
         if not self.__isValidPrice(args):
@@ -48,14 +48,11 @@ class Product(Resource):
         return {'message': 'Product updated', 'product': args}, 200
 
     def delete(self, name):
-        if not self.__isInDatabase(name):
-            return {'message': 'Product does not exist (anymore)'}, 410
+        if not self.repo.hasItem(name):
+            return Product.notFoundMessage, 410
 
         self.repo.remove(name)
         return {'message': 'Product removed'}, 200
-
-    def __isInDatabase(self, name):
-        return self.repo.hasItem(name)
 
     def __isValidPrice(self, args):
         return int(args['unitPrice']) >= 5
