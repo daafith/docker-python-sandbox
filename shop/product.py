@@ -4,6 +4,7 @@ from .productRepository import ProductRepository
 class Product(Resource):
     notFoundMessage = {'message': 'Product not found'}
     invalidPriceMessage = {'message': 'Price must be 5 or higher'}
+    invalidAmountMessage = {'message': 'Size must be 1 or higher'}
 
     def __init__(self):
         self.repo = ProductRepository()
@@ -31,6 +32,9 @@ class Product(Resource):
         
         if not self.__isValidPrice(args):
             return Product.invalidPriceMessage, 400
+
+        if not self.__isValidSize(args):
+            return Product.invalidAmountMessage, 400
  
         self.repo.save(args)
         return {'message': 'Product registered', 'product': args}, 201
@@ -43,6 +47,9 @@ class Product(Resource):
 
         if not self.__isValidPrice(args):
             return Product.invalidPriceMessage, 400
+        
+        if not self.__isValidSize(args):
+            return Product.invalidAmountMessage, 400
          
         self.repo.update(args)
         return {'message': 'Product updated', 'product': args}, 200
@@ -56,4 +63,7 @@ class Product(Resource):
 
     def __isValidPrice(self, args):
         return int(args['unitPrice']) >= 5
+
+    def __isValidSize(self, args):
+        return int(args['unitSize']) >= 1
 
