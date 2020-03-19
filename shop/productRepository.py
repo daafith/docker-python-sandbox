@@ -1,6 +1,6 @@
 from .db import Collection, get_db
 
-class ProductRepository(object):
+class ProductRepository:
     def __init__(self):
         self.db = get_db(Collection.products)
     
