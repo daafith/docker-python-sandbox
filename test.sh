@@ -72,7 +72,7 @@ succesPut=$(curl --header "Content-Type: application/json" \
   --data '{"name":"Sponges","unitPrice":199,"unitSize":8,"unitType":"ITEM"}' \
   http://localhost:1234/product)
 
-failPutNotFound=$(curl --header "Content-Type: application/json" \
+failPut=$(curl --header "Content-Type: application/json" \
   --request PUT \
   --data '{"name":"Spongebob","unitPrice":199,"unitSize":8,"unitType":"ITEM"}' \
   http://localhost:1234/product)
@@ -104,7 +104,7 @@ validate "$failPostWrongSize" "Size must be 1 or higher"
 validate "$failPostWrongItemType" "\"unitType\": \"BOX is not a valid choice"
 validate "$failPostMissingParam" "\"unitType\": \"Missing required parameter"
 validate "$succesPut" "Product updated"
-validate "$failPutNotFound" "Product not found"
+validate "$failPut" "Product not found"
 validate "$succesGet" "Product found"
 validate "$succesGetAll" "1 Product(s) found"
 validate "$failGet" "Product not found"
@@ -113,5 +113,6 @@ validate "$failDelete" "Product not found"
 
 echo 
 echo Test Summary:
-echo "$testOK" Test Passed 
-echo "$testFAIL" Test Failed
+echo "$testOK" Tests Passed 
+echo "$testFAIL" Tests Failed
+echo ""
