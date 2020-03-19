@@ -52,4 +52,4 @@ DELETE /product/<name>
 Deletes the product linked to the name
 
 ### Test
-You can use the Postman collection to validate stuff works. Nothing fancy, but it's something.
+Run `. test.sh` to run tests. Or you can use the Postman collection if you like that (bash is better though ;)).
