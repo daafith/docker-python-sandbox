@@ -2,7 +2,7 @@ echo
 echo "------------------"
 echo "Removing data"
 echo "------------------"
-. clean.sh
+sh clean.sh
 echo
 echo "------------------"
 echo "Testing POST"
@@ -115,4 +115,4 @@ echo
 echo Test Summary:
 echo "$testOK" Tests Passed 
 echo "$testFAIL" Tests Failed
-echo ""
+echo 
